@@ -18,13 +18,14 @@ export default props => {
                 <Stack.Screen
                     name='UserList'
                     component={UserList}
-                    options={() => {
-                        return{
-                            title:'Lista de Usuários',
-                            headerRight: () =>(
-                                <Button 
+                    options={({ navigation }) => {
+                        return {
+                            title: 'Lista de Usuários',
+                            headerRight: () => (
+                                <Button
+                                    onPress={() => navigation.navigate('UserForm')}
                                     type='clear'
-                                    icon={<Icon name='add' size={25} color='white' /> }
+                                    icon={<Icon name='add' size={25} color='white' />}
                                 />
                             )
                         }
@@ -34,7 +35,7 @@ export default props => {
                     name='UserForm'
                     component={UserForm}
                     options={{
-                        title:'Formulário de Usuários'
+                        title: 'Formulário de Usuários'
                     }}
                 />
             </Stack.Navigator>
@@ -45,9 +46,9 @@ export default props => {
 const screenOptions = {
     headerStyle: {
         backgroundColor: '#f4511e',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
         fontWeight: 'bold',
-      },
+    },
 }
