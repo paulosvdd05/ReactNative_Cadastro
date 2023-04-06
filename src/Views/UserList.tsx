@@ -39,7 +39,7 @@ export default props => {
 
     function getUserItem({ item: user }) {
         return (
-            <ListItem onPress={() => props.navigation.navigate('UserForm')}>
+            <ListItem bottomDivider onPress={() => props.navigation.navigate('UserForm', user)}>
                 <Avatar source={{ uri: user.avatarUrl }} />
                 <ListItem.Content >
                     <ListItem.Title>{user.name}</ListItem.Title>
