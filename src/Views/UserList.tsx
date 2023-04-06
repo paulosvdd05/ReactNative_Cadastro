@@ -1,11 +1,21 @@
 import React from 'react'
-import {Text} from 'react-native'
+import { Text, View, FlatList } from 'react-native'
+import users from '../data/users'
 
 
 export default props => {
-    console.warn(Object.keys(props));
-    
+
+    function getUserItem({ item: user }) {
+        return <Text>{user.name}</Text>
+    }
+
     return (
-        <Text>UserList</Text>
+        <View>
+            <FlatList
+                keyExtractor={user => user.id.toString()}
+                data={users}
+                renderItem={getUserItem}
+            />
+        </View>
     )
 }
