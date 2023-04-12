@@ -6,16 +6,19 @@ import UsersContext from '../../context/UserContext'
 
 export default props => {
 
-    const {state} = useContext(UsersContext)
-  
-    
+    const { state, dispatch } = useContext(UsersContext)
 
-    function confirmUserDeletion(user){
-        Alert.alert('Excluir Usuário', 'Deseja excluir o usuário?',[
+
+
+    function confirmUserDeletion(user) {
+        Alert.alert('Excluir Usuário', 'Deseja excluir o usuário?', [
             {
                 text: 'Sim',
-                onPress(){
-                    console.warn('delete' + user.id);
+                onPress() {
+                    dispatch({
+                        type: 'deleteUser',
+                        payload: user,
+                    })
                 }
             },
             {
@@ -24,18 +27,18 @@ export default props => {
         ])
     }
 
-    function getActions(user){
-        return(
+    function getActions(user) {
+        return (
             <>
-                <Button 
+                <Button
                     onPress={() => props.navigation.navigate('UserForm', user)}
                     type='clear'
-                    icon={<Icon name='edit' size={25} color='orange'/>}
+                    icon={<Icon name='edit' size={25} color='orange' />}
                 />
-                <Button 
+                <Button
                     onPress={() => confirmUserDeletion(user)}
                     type='clear'
-                    icon={<Icon name='delete' size={25} color='red'/>}
+                    icon={<Icon name='delete' size={25} color='red' />}
                 />
             </>
         )
@@ -49,10 +52,10 @@ export default props => {
                     <ListItem.Title>{user.name}</ListItem.Title>
                     <ListItem.Subtitle>{user.email}</ListItem.Subtitle>
                 </ListItem.Content>
-                <View style={{flexDirection:'row'}}>
+                <View style={{ flexDirection: 'row' }}>
                     {getActions(user)}
                 </View>
-                
+
             </ListItem>
         )
     }
