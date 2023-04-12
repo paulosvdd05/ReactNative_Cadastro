@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { View, Text, TextInput, StyleSheet } from 'react-native'
 import { Button, Icon } from 'react-native-elements'
+import UsersContext from '../../context/UserContext'
 
 
 export default ({ route, navigation }) => {
     const [user, setUser] = useState(route.params ? route.params : {})
+    const {dispatch} = useContext(UsersContext)
+
     return (
         <View style={style.form}>
             <Text>Name</Text>
@@ -25,11 +28,15 @@ export default ({ route, navigation }) => {
                 placeholder='Informe a URL do Avatar'
                 value={user.avatarUrl}
             />
-            <Button
+            <Button buttonStyle={{backgroundColor:'#2bc725'}}
                 onPress={ () => {
+                    dispatch({
+                        type:user.id ? 'updateUser' : 'createUser',
+                        payload: user,
+                    })
                     navigation.goBack()
                 }}
-                icon={<Icon type='font-awesome' name='check' size={25} color='#fff' />}
+                icon={<Icon type='font-awesome' name='check' size={25} color='#fff'/>}
             />
         </View>
 

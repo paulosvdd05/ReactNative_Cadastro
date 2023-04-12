@@ -4,11 +4,26 @@ import users from '../src/data/users'
 const initialState = { users }
 const UsersContext = createContext({})
 
-const actions ={
-    deleteUser(state, action){
+const actions = {
+    createUser(state, action) {
         const user = action.payload
-        return{
-            //...state,
+        user.id = Math.random()
+        return {
+            ...state,
+            users: [...state.users, user],
+        }
+    },
+    updateUser(state, action) {
+        const updated = action.payload
+        return {
+            ...state,
+            users: state.users.map(u => u.id === updated.id ? updated: u)
+        }
+    },
+    deleteUser(state, action) {
+        const user = action.payload
+        return {
+            ...state,
             users: state.users.filter(u => u.id !== user.id)
         }
     }
